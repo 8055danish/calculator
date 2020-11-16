@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		body{
+			margin:30px;
+		}
+		input[type=button]{
+			margin:15px;font-size: 38px;padding:15px;border-radius: 5px 5px 5px 5px;
+			box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+
+		}
+		#display
+		{
+			width:320px;height:40px;background-color: black;opacity: 0.8;color:white;border-radius: 10px 10px 10px 10px;font-size:30px;box-shadow: 4px 4px lightgrey;
+			box-shadow:  5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+		}
+
+		
+	</style>
+	<script>
+		var num = "";
+		var temp1 = "";
+		var result = "";
+		var execute = false;
+		var temp0 ="";
+		var arr = [];
+		function calOnce(a,b){
+			parseFloat(a);
+			parseFloat(b);
+			var o = arr[0];
+			if(!execute){
+				execute = true;
+				if(o=="add"){
+					result = eval(a + b);
+					document.getElementById("display").value = result;
+				}
+				if(o=="sub"){
+					result = eval(a - b);
+					document.getElementById("display").value = result;
+				}
+				if(o=="mul"){
+					result = eval(a * b);
+					document.getElementById("display").value = result;
+				}
+				if(o=="div"){
+					result = eval(a / b);
+					document.getElementById("display").value = result;
+				}
+			}
+		}
+
+		function cal(a,b){
+			parseFloat(a);
+			parseFloat(b);
+			var o = arr[0];
+			if(o=="add"){
+				result = eval(a + b);
+				document.getElementById("display").value = result;
+			}
+			if(o=="sub"){
+				result = eval(a - b);
+				document.getElementById("display").value = result;
+			}
+			if(o=="mul"){
+				result = eval(a * b);
+				document.getElementById("display").value = result;
+			}
+			if(o=="div"){
+				result = eval(a / b);
+				document.getElementById("display").value = result;
+			}
+		}
+
+		function number(n){
+			temp0 += n;
+			document.getElementById("display").value=temp0;
+			temp1 = parseFloat(document.getElementById("display").value);
+
+		}
+
+		function operation(o) {
+			var opt = o;
+			arr.push(opt);
+			if(arr.length>2){
+				arr.shift();
+
+			}
+
+			document.getElementById("display").value = "";
+
+			if(result!==""){
+				cal(result,temp1);
+			}	
+
+			if(num!==""){
+				calOnce(num,temp1);
+
+			}
+
+			num = temp1;
+			temp1 = "";
+			temp0 = "";
+
+		}
+
+		function clear1() {
+			document.getElementById("display").value = " ";
+			num = "";temp0 ="";temp1="";result = "";
+
+		}
+
+	</script>
+</head>
+<body>
+	<div align=center>
+		<tr><input type="text" id="display" disabled></tr><br>
+		<br>
+		<tr><td><input type="button" name="one" value="1" onclick="number(1)"></td><td><input type="button" name="two" value="2" onclick="number('2')"></td><td><input type="button" name="three" value="3" onclick="number(3)"></td><td><input type="button" name="plus" value="+" onclick="operation('add')"></td></tr>
+		<br>
+		<tr><td><input type="button" name="four" value="4" onclick="number(4)"></td><td><input type="button" name="five" value="5" onclick="number(5)"></td><td><input type="button" name="six" value="6" onclick="number(6)"></td><td><input type="button" name="minus" value="-" onclick="operation('sub')"></td></tr>
+		<br>
+		<tr><td><input type="button" name="seven" value="7" onclick="number(7)"></td><td><input type="button" name="eight" value="8" onclick="number(8)"></td><td><input type="button" name="nine" value="9" onclick="number(9)"></td><td><input type="button" name="multiply" value="*" onclick="operation('mul')"></td></tr>
+		<br>
+		<tr><td><input type="button" name="clear" value="Clear" onclick="clear1()"></td><td><input type="button" name="zero" value="0" onclick="number(0)"></td><td><input type="button" name="divide" value="/" onclick="operation('div')"></td></tr>
+
+	</form>
+</body>
+</html>
